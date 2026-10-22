@@ -234,3 +234,9 @@ My strength lies at the intersection of business operations and practical techno
 I can understand a business process, identify opportunities for improvement, and independently build lightweight tools to address those needs. My projects range from internal utilities designed for colleagues to personal automations for sales administration and customer communication.
 
 I focus on practical implementation: using the technology available to solve the problem at hand, while keeping the resulting workflow understandable and usable.
+
+## Support
+
+If you find my tools useful, you can support my work on Ko-fi.
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/Q5Q51QYQQS)

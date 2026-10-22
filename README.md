@@ -1,20 +1,22 @@
 # Business Operations & Practical Automation
 
-I build practical, lightweight tools to solve day-to-day business problems, particularly when budget constraints make off-the-shelf solutions impractical.
+I build lightweight tools to solve practical business problems, with a focus on workflow improvement, operational usability, and cost-conscious automation.
 
-My approach is to understand the existing workflow, identify repetitive manual tasks, and use available technologies to develop cost-conscious solutions that fit business needs.
+Most of my tools are designed for colleagues who need simple, reliable ways to complete everyday tasks without dealing with complicated formulas, technical configurations, or repetitive manual steps. I also build personal workflow automations to streamline quotation preparation, invoicing, and customer communication.
 
-My projects cover workflow automation, data handling, customer communication, and internal business utilities.
+My approach is to understand the actual workflow first, identify unnecessary manual effort or operational risks, and then build a solution using existing tools wherever possible.
+
+Rather than adding technology for its own sake, I focus on making everyday work easier to perform, maintain, and repeat.
 
 ## Core Skills
 
 - **Business Operations:** Workflow Improvement, Process Standardization, Operational Support
 - **Sales Operations:** Quotation Preparation, Invoice Processing, Customer Communication, Order Support
-- **Automation:** Google Apps Script, JavaScript, HTML, CSS
+- **Practical Automation:** Google Apps Script, JavaScript, HTML, CSS
 - **Data Management:** SQL, Excel, Google Sheets, Data Validation, Data Transformation
 - **API Integration:** REST APIs, Zoho Invoice API
-- **Data Visualization:** Google Sheets Charts, Dashboard Preparation
-- **Collaboration:** Cross-functional Coordination, Requirements Understanding, Documentation
+- **Reporting & Visualization:** Data Aggregation, Google Sheets Charts, Dashboard Preparation
+- **Solution Design:** Requirements Understanding, End-User Usability, Error Prevention, Cost-Conscious Implementation
 
 ## Projects
 
@@ -22,94 +24,112 @@ My projects cover workflow automation, data handling, customer communication, an
 
 **Technologies:** HTML, CSS, JavaScript, Leaflet, GeoJSON
 
-**Business Context**
+**Project Type:** Lightweight data utility
 
-Working with geographic coordinate data can involve repetitive manual input and formatting. This lightweight browser-based tool was designed to simplify the preparation of rectangular geographic areas and the export of coordinate data.
+#### Background
 
-In my previous role, I worked with golf-course latitude and longitude data, including joining, cleaning, and checking records using SQL. This project demonstrates a practical approach to making coordinate-related tasks easier to handle without relying on a more complex GIS workflow.
+In my previous role, I worked with golf-course latitude and longitude data, including joining, cleaning, and checking records using SQL.
 
-**Key Features**
+This project explores a practical way to prepare geographic coordinate data without requiring users to perform every step manually or rely on a full GIS application for a relatively simple task.
+
+#### Key Features
 
 - Enter northeast and southwest latitude/longitude coordinates.
-- Display the selected geographic area on an interactive map.
-- Draw a rectangle directly on the map.
+- View the selected area on an interactive map.
+- Draw a rectangular area directly on the map.
 - Extract the rectangle's geographic bounds.
 - Generate a GeoJSON Polygon.
-- Copy coordinate data for use in spreadsheets.
+- Copy coordinate data for use in other applications or spreadsheets.
 
-**Skills Demonstrated**
+#### Skills Demonstrated
 
-- Practical tool development
-- Geographic coordinate data handling
+- Practical problem-solving
+- Coordinate data handling
 - Data formatting and export
 - JavaScript and interactive map integration
 
-**Scope**
-
-This tool supports basic bounding-box creation and GeoJSON generation. It is not intended to replace a full GIS platform or perform advanced geospatial analysis.
+**Scope:** This is a lightweight coordinate utility, not a replacement for a full GIS platform or an advanced geospatial analysis system.
 
 ---
 
-### 2. Japanese Postal Code & Furigana Lookup
+### 2. Japanese Postal Code & Address Lookup Tool
 
 **Technologies:** HTML, CSS, JavaScript, REST API, Clipboard API
 
-**Business Context**
+**Project Type:** Internal utility for colleagues
 
-Entering Japanese addresses manually can be repetitive, particularly when handling customer information or administrative tasks. This browser-based utility simplifies address lookup using a Japanese postal code.
+#### Business Context
 
-**Key Features**
+Colleagues frequently handled customer orders over the phone and needed to enter Japanese addresses while speaking with customers.
+
+Looking up addresses and entering them manually during phone calls added extra steps to the order-taking process. I developed a lightweight browser-based tool to help colleagues retrieve address information quickly using a Japanese postal code, making address entry easier during routine order handling.
+
+#### Key Features
 
 - Accept a seven-digit Japanese postal code.
 - Validate the input format.
 - Retrieve the corresponding address using the ZipCloud API.
-- Display the address with kana reading support.
-- Copy the address for use in other applications.
-- Provide basic input validation and error handling.
+- Display the retrieved address with kana-reading support.
+- Allow colleagues to copy the address for use in other business applications.
+- Handle invalid input and API errors.
 
-**Skills Demonstrated**
+#### Design Considerations
 
+The tool was designed around the actual workflow of colleagues taking orders by phone.
+
+Rather than requiring users to navigate external websites and manually copy address information, it provides a simple interface for postal-code lookup and copying the result.
+
+The emphasis was on making a frequent operational task easier to perform, with minimal additional steps or technical knowledge required.
+
+#### Skills Demonstrated
+
+- Business process observation and improvement
+- Internal tool development
 - REST API integration
-- Front-end development
-- Input validation
-- Data presentation
-- Small-scale business utility design
+- Input validation and error handling
+- User-oriented workflow design
+- Practical automation for day-to-day operations
 
-**Scope**
-
-The tool depends on internet access and the availability of the external postal-code API. It is intended to support address lookup, not to verify a customer's actual residence or mailing eligibility.
+**Scope:** The tool supports postal-code-based address lookup. The retrieved address depends on the external API, and postal-code lookup does not independently verify a customer's actual address.
 
 ---
 
-### 3. Personalized Email Automation
+### 3. Custom HTML Email Design & Bulk Sending Automation
 
-**Technologies:** Google Sheets, Google Apps Script, HTML, Google Drive
+**Technologies:** Canva, HTML, Google Drive, Google Sheets, Google Apps Script
 
-**Business Context**
+**Project Type:** Business Operations Automation
 
-In business operations, customer emails may need to include personalized information, formatted HTML content, and embedded images. Preparing each message manually can introduce repetitive work and increase the risk of inconsistent formatting.
+#### Business Context
 
-I used existing tools to support a more standardized email preparation and sending workflow without introducing an additional dedicated marketing automation platform.
+The company needed visually appealing, customized bulk emails but did not have a budget for a paid email marketing or email design platform.
 
-**Key Features**
+To meet this need within the available budget, I developed a workflow using free Canva design tools, Google Drive, Google Sheets, and Google Apps Script.
 
-- Use spreadsheet-based recipient information.
-- Insert recipient-specific details into HTML email content.
-- Prepare formatted email templates.
-- Include images stored in Google Drive.
-- Automate email preparation and sending through Google Apps Script.
+#### Solution Design
 
-**Skills Demonstrated**
+1. **Email design:** Used Canva's free design tools to create visually polished, customized email content and exported the HTML files and associated assets.
+2. **Image hosting:** Uploaded the exported assets to Google Drive and updated the image references in the HTML to use hosted image URLs.
+3. **Personalization:** Used Google Sheets to manage recipient information and Google Apps Script to insert recipient-specific details.
+4. **Bulk sending:** Automated email preparation and distribution through Google Apps Script.
 
-- Workflow automation
-- HTML email formatting
-- Spreadsheet-driven personalization
+#### Business Value
+
+- **Budget-conscious problem-solving:** Addressed the business need without introducing an additional paid platform subscription.
+- **Customized communication:** Created visually distinctive email designs tailored to the intended audience.
+- **Workflow integration:** Combined design tools, cloud storage, spreadsheet data, and scripting into a practical solution.
+- **Reduced manual work:** Automated repetitive email preparation and sending steps.
+
+#### Skills Demonstrated
+
+- Business requirements understanding
+- Cost-conscious solution design
+- HTML email customization
+- Google Apps Script automation
 - Google Workspace integration
 - Customer communication process improvement
 
-**Scope**
-
-The public portfolio version should use synthetic recipient information and sample content. It should not contain real customer data, internal email templates, or company-specific assets.
+**Scope:** This is a lightweight custom email workflow, not a replacement for a full email marketing platform. The public portfolio version should use synthetic recipient data and non-confidential design assets.
 
 ---
 
@@ -117,33 +137,39 @@ The public portfolio version should use synthetic recipient information and samp
 
 **Technologies:** Google Sheets, Google Apps Script, Zoho Invoice API, Excel
 
-**Business Context**
+**Project Type:** Personal sales operations automation
 
-In my current role, I worked with quotation and invoice processes that involved product pricing, customer information, document preparation, and customer communication.
+#### Background
 
-With limited budget for additional software, I developed a workflow using tools already available to the company. The goal was to connect spreadsheet-based information with invoice generation and reduce the need to repeat the same steps manually.
+Quotation and invoice preparation involves product selection, customer information, pricing calculations, document generation, and customer communication.
 
-**Key Features**
+To reduce repetitive work, I developed a lightweight workflow that connects spreadsheet-based product and customer information with Zoho Invoice, using tools already available rather than purchasing a dedicated additional system.
+
+#### Key Features
 
 - Organize product and customer information in Google Sheets.
-- Select products from a dropdown list.
+- Select products from dropdown lists.
 - Retrieve pricing information using spreadsheet lookup formulas.
-- Calculate quotation totals based on selected products and quantities.
-- Use Google Apps Script to connect the workflow with the Zoho Invoice API.
+- Calculate quotation totals based on product selection and quantities.
+- Connect the workflow to the Zoho Invoice API through Google Apps Script.
 - Support invoice creation and automated email delivery.
 
-**Skills Demonstrated**
+#### Design Considerations
+
+The solution combines spreadsheet formulas for day-to-day data entry and calculations with backend scripting for API integration and automation.
+
+This keeps the workflow accessible while reducing the need to repeat the same information across multiple steps.
+
+#### Skills Demonstrated
 
 - Sales operations process improvement
-- Google Sheets workflow design
+- Spreadsheet-based workflow design
 - Google Apps Script automation
-- API integration
+- REST API integration
 - Data lookup and calculation
-- Business process standardization
+- Customer communication workflow design
 
-**Scope**
-
-The public repository is intended to demonstrate the workflow design and technical approach using sanitized code and sample data. It must not contain production credentials, real customer information, internal pricing, or confidential company data.
+**Scope:** This project demonstrates automation of a defined quotation and invoicing workflow. The public version should use sanitized code, synthetic data, and non-production credentials.
 
 ---
 
@@ -151,37 +177,60 @@ The public repository is intended to demonstrate the workflow design and technic
 
 **Technologies:** Google Sheets, Google Apps Script, Data Processing, Charts
 
-**Business Context**
+**Project Type:** Internal reporting utility for colleagues
 
-Survey responses often need to be organized and summarized before the results can be reviewed. This project explores how spreadsheet automation can help process questionnaire responses and present the results in a more accessible format.
+#### Background
 
-**Key Features**
+I designed this tool to help colleagues process questionnaire data without having to understand or maintain spreadsheet formulas.
 
-- Process questionnaire response data.
-- Summarize answer counts for selected questions.
-- Organize results for review.
-- Generate charts to support visual interpretation.
+Because the spreadsheet is intended for operational users, I wanted to minimize the risk of accidental changes to formulas or the underlying workbook structure. Rather than asking colleagues to manually modify multiple sheets, I moved the processing logic into Google Apps Script so the workflow could be executed through a simple action.
 
-**Skills Demonstrated**
+#### Solution Design
 
-- Data processing
-- Spreadsheet automation
-- Basic aggregation
-- Data visualization
-- Reporting support
+The spreadsheet separates the workflow into three stages:
 
-**Scope**
+| Sheet | Purpose |
+|---|---|
+| `01_Raw Data` | Source questionnaire data |
+| `02_Clean Data` | Processed data |
+| `03_Dashboard` | Reporting output |
 
-The public version should use sample or synthetic survey data. The final project description should reflect the exact questions, processing logic, and chart-generation functions implemented in the published code.
+Google Apps Script handles the underlying processing and report-generation logic, while the spreadsheet provides a simpler interface for colleagues.
+
+#### Key Design Principles
+
+- **Simple operation:** Colleagues can run the workflow without needing to understand the code.
+- **Reduced risk of accidental edits:** Processing logic is kept out of the user-facing workflow as much as possible.
+- **Centralized logic:** Data processing is managed in the backend rather than relying on users to maintain formulas.
+- **Repeatable execution:** The workflow provides a consistent approach to refreshing the output.
+
+#### Skills Demonstrated
+
+- Business requirements understanding
+- Google Apps Script development
+- Spreadsheet workflow design
+- Data processing and transformation
+- Reporting and dashboard preparation
+- End-user usability and operational risk reduction
+
+**Key takeaway:** This project demonstrates how I approach internal tool development: simplify the user experience, keep technical complexity behind the scenes, and design around the way colleagues actually work.
 
 ---
 
 ## My Approach to Problem Solving
 
-Across these projects, my approach is to:
+Across these projects, I focus on five principles:
 
-1. **Understand the business problem** — Identify repetitive tasks, operational bottlenecks, and sources of manual effort.
-2. **Work within constraints** — Evaluate existing tools before introducing additional software or service costs.
-3. **Build practical solutions** — Use lightweight automation and integrations where they can address the actual need.
-4. **Consider data quality** — Apply input validation, structured data handling, and consistent output formats where appropriate.
-5. **Keep the solution fit for purpose** — Prioritize usability and maintainability over unnecessary technical complexity.
+1. **Start with the actual workflow.** Understand how the task is performed today, who performs it, and where repetitive effort or operational risks arise.
+2. **Design for the user.** Build tools that colleagues can use without needing to understand the underlying code or formulas.
+3. **Work within practical constraints.** Make use of existing software and APIs before introducing additional cost or complexity.
+4. **Automate where it adds value.** Use scripts, formulas, and integrations to reduce repetitive steps and make execution more consistent.
+5. **Keep solutions fit for purpose.** Prioritize usability, clarity, and maintainability over unnecessary technical complexity.
+
+## What This Portfolio Demonstrates
+
+My strength lies at the intersection of business operations and practical technology.
+
+I can understand a business process, identify opportunities for improvement, and independently build lightweight tools to address those needs. My projects range from internal utilities designed for colleagues to personal automations for sales administration and customer communication.
+
+I focus on practical implementation: using the technology available to solve the problem at hand, while keeping the resulting workflow understandable and usable.

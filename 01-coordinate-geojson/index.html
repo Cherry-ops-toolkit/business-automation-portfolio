@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="robots" content="noindex, nofollow">
+  <title>Coordinate Bounding Box & GeoJSON Generator</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-draw/dist/leaflet.draw.css" />
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 0;
+      padding: 10px;
+    }
+
+    h2 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .inputs, .output {
+      flex: 1;
+      min-width: 280px;
+      max-width: 420px;
+      display: flex;
+      flex-direction: column;
+      font-size: 13px;
+    }
+
+    .inputs label, .output label {
+      margin-top: 4px;
+      font-size: 13px;
+    }
+
+    .inputs input {
+      padding: 6px;
+      font-size: 13px;
+      margin: 4px 0;
+    }
+
+    .output textarea {
+      width: 100%;
+      height: 150px;
+      font-size: 12px;
+      margin-top: 6px;
+      box-sizing: border-box;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .button-group button {
+      padding: 6px;
+      font-size: 13px;
+    }
+
+    #map {
+      margin-top: 12px;
+      width: 100%;
+      height: 300px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Coordinate Bounding Box & GeoJSON Generator</h2>
+
+  <div class="container">
+    <!-- LEFT -->
+    <div class="inputs">
+      <label>右上：北東緯度,北東経度</label>
+      <input id="neInput" placeholder="例: 29.40365031,-81.1432702" />
+      <label>左下：南西緯度,南西経度</label>
+      <input id="swInput" placeholder="例: 29.36026522,-81.17361107" />
+
+      <div class="button-group">
+        <button onclick="showOnMap()">🗺 地図に表示</button>
+        <button onclick="copyLatLngs()">📋 座標をコピー (Sheets用)</button>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="output">
+      <label>生成されたGeoJSON <a href="https://geojson.io/" target="_blank" rel="noopener noreferrer">（geojson.ioで確認）</a></label>
+      <textarea id="output" placeholder="ここにGeoJSONが表示されます"></textarea>
+
+      <div class="button-group">
+        <button onclick="generateJSON()">✅ JSONを生成</button>
+        <button onclick="copyToClipboard()">📋 GeoJSONをコピー</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet-draw/dist/leaflet.draw.js"></script>
+  <script>
+    const map = L.map('map').setView([29.382, -81.158], 14);
+
+    L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles © Esri, Maxar, Earthstar Geographics',
+      maxZoom: 19
+    }).addTo(map);
+
+    let currentLayer;
+
+    function parseInputs() {
+      const neVal = document.getElementById('neInput').value.trim();
+      const swVal = document.getElementById('swInput').value.trim();
+
+      const neParts = neVal.split(',').map(Number);
+      const swParts = swVal.split(',').map(Number);
+
+      if (neParts.length !== 2 || swParts.length !== 2 || [...neParts, ...swParts].some(isNaN)) {
+        alert('座標を正しく入力してください（緯度,経度）');
+        return null;
+      }
+
+      const [neLat, neLng] = neParts;
+      const [swLat, swLng] = swParts;
+
+      if (neLat < swLat || neLng < swLng) {
+        alert('NE座標はSW座標より大きくなければなりません。');
+        return null;
+      }
+
+      return [
+        [swLng, neLat],  // NW
+        [neLng, neLat],  // NE
+        [neLng, swLat],  // SE
+        [swLng, swLat],  // SW
+        [swLng, neLat]   // Close polygon
+      ];
+    }
+
+    function generateJSON() {
+      const coords = parseInputs();
+      if (!coords) return;
+
+      const geojson = {
+        type: "FeatureCollection",
+        features: [
+          {
+            type: "Feature",
+            properties: {},
+            geometry: {
+              type: "Polygon",
+              coordinates: [coords]
+            }
+          }
+        ]
+      };
+
+      document.getElementById('output').value = JSON.stringify(geojson, null, 2);
+    }
+
+    function showOnMap() {
+      const coords = parseInputs();
+      if (!coords) return;
+
+      const latlngs = coords.map(c => [c[1], c[0]]); // Leaflet expects [lat, lng]
+
+      if (currentLayer) {
+        map.removeLayer(currentLayer);
+      }
+
+      currentLayer = L.polygon(latlngs, {
+        color: 'red',
+        weight: 2,
+        fillOpacity: 0
+      }).addTo(map);
+
+      map.fitBounds(currentLayer.getBounds());
+    }
+
+    function copyToClipboard() {
+      const text = document.getElementById('output').value;
+      if (!text) {
+        alert("コピーするGeoJSONがありません");
+        return;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        alert("コピーしました！");
+      }).catch(err => {
+        alert("コピーに失敗しました: " + err);
+      });
+    }
+
+    function copyLatLngs() {
+      const neVal = document.getElementById('neInput').value.trim();
+      const swVal = document.getElementById('swInput').value.trim();
+
+      const neParts = neVal.split(',').map(part => part.trim());
+      const swParts = swVal.split(',').map(part => part.trim());
+
+      if (neParts.length !== 2 || swParts.length !== 2 || [...neParts, ...swParts].some(isNaN)) {
+        alert('座標を正しく入力してください（緯度,経度）');
+        return;
+      }
+
+      const result = [neParts[0], neParts[1], swParts[0], swParts[1]].join('\t');
+
+      navigator.clipboard.writeText(result).then(() => {
+        alert("4点座標をコピーしました（Sheetsに貼り付け可能）！");
+      }).catch(err => {
+        alert("コピーに失敗しました: " + err);
+      });
+    }
+
+    // Leaflet.draw setup
+    const drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    const drawControl = new L.Control.Draw({
+      draw: {
+        polyline: false,
+        polygon: false,
+        circle: false,
+        marker: false,
+        circlemarker: false,
+        rectangle: {
+          shapeOptions: {
+            color: 'blue',
+            weight: 2
+          }
+        }
+      },
+      edit: {
+        featureGroup: drawnItems,
+        remove: true
+      }
+    });
+    map.addControl(drawControl);
+
+    map.on(L.Draw.Event.CREATED, function (e) {
+      const layer = e.layer;
+
+      drawnItems.clearLayers();
+      drawnItems.addLayer(layer);
+
+      const bounds = layer.getBounds();
+      const ne = bounds.getNorthEast();
+      const sw = bounds.getSouthWest();
+
+      document.getElementById('neInput').value = `${ne.lat.toFixed(8)},${ne.lng.toFixed(8)}`;
+      document.getElementById('swInput').value = `${sw.lat.toFixed(8)},${sw.lng.toFixed(8)}`;
+    });
+  </script>
+</body>
+</html>
+``

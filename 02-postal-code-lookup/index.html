@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>郵便番号で住所＋フリガナ</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  input, button {
+    padding: 12px;
+    font-size: 22px;
+    margin: 8px 0;
+  }
+  .result {
+    margin-top: 20px;
+    font-size: 26px;
+  }
+  ruby { font-size: 32px; }
+  rt { font-size: 18px; }
+  .label {
+    font-size: 22px;
+  }
+</style>
+</head>
+<body>
+
+<h2 style="font-size: 28px;">郵便番号で住所＋フリガナ</h2>
+
+<div class="label">郵便番号（例：1000001）</div>
+<input id="zipcode" type="text" placeholder="例：1000001" maxlength="7">
+<button onclick="searchAddress()">検索</button>
+
+<div class="result">
+  <div><strong>住所：</strong></div>
+  <div id="address"></div>
+</div>
+
+<!-- 复制按钮 -->
+<button id="copyBtn" onclick="copyAddress()" style="display:none;">
+  住所をコピー
+</button>
+
+<script>
+let currentAddressKanji = "";
+
+async function searchAddress() {
+  const zip = document.getElementById("zipcode").value.trim();
+  if (zip.length !== 7 || isNaN(zip)) {
+    alert("郵便番号は7桁の数字で入力してください。");
+    return;
+  }
+
+  const res = await fetch(`https://zipcloud.ibsnet.co.jp/api/search?zipcode=${zip}`);
+  const data = await res.json();
+
+  if (data.status !== 200 || !data.results) {
+    alert("住所が見つかりませんでした。");
+    return;
+  }
+
+  const r = data.results[0];
+
+  const addressRuby =
+    `<ruby>${r.address1}<rt>${r.kana1}</rt></ruby>` +
+    `<ruby>${r.address2}<rt>${r.kana2}</rt></ruby>` +
+    `<ruby>${r.address3}<rt>${r.kana3}</rt></ruby>`;
+
+  document.getElementById("address").innerHTML = addressRuby;
+
+  // 只保存汉字地址（用于复制）
+  currentAddressKanji = `${r.address1}${r.address2}${r.address3}`;
+
+  // 显示复制按钮
+  document.getElementById("copyBtn").style.display = "inline-block";
+}
+
+function copyAddress() {
+  if (!currentAddressKanji) return;
+
+  navigator.clipboard.writeText(currentAddressKanji)
+    .then(() => {
+      alert("住所をコピーしました！");
+    })
+    .catch(() => {
+      alert("コピーに失敗しました。");
+    });
+}
+</script>
+
+</body>
+</html>

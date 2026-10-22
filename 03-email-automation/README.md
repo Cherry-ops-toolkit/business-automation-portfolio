@@ -2,50 +2,56 @@
 
 ## Overview
 
-A cost-effective workflow for sending personalized marketing emails at scale using Canva, Google Drive, and Google Apps Script.
+A cost-effective marketing email automation workflow built with Google Sheets, Google Apps Script, Canva, and Google Drive.
 
-The workflow combines visually designed HTML email content with customer-specific information, enabling bulk outreach while making each email feel more personal to its recipient.
+The workflow reads customer names and email addresses from Google Sheets, personalizes HTML email content for each recipient, and sends marketing emails in bulk while maintaining a personal touch.
 
 ## Business Context
 
-Sending marketing emails to multiple customers efficiently can be challenging when each message needs personalized details.
+Sending marketing communications to multiple customers manually can be repetitive and time-consuming. At the same time, generic mass emails may feel impersonal to recipients.
 
-I built a workflow that combines existing tools to automate email personalization without purchasing a dedicated marketing automation platform. Google Drive was used to host image assets so that images embedded in the email content could be accessed through persistent URLs rather than relying on temporary or inaccessible local resources.
+To address this challenge, I developed a lightweight workflow using existing tools to automate recipient-level personalization without purchasing a dedicated marketing automation platform.
 
 ## Key Features
 
-- Marketing email designs created using Canva's free plan
-- Image hosting through Google Drive
-- HTML email content processed using Google Apps Script
-- Automatic insertion of customer-specific information, such as names and email addresses
-- Personalized bulk customer outreach with visually rich email content
+- Customer name and email management in Google Sheets
+- Automated row-by-row processing of recipient information
+- Personalized greetings and email subject lines
+- HTML marketing email design created using Canva's free plan
+- Google Drive storage for HTML templates and image assets
+- Inline image embedding in emails through Google Apps Script
+- Bulk email sending through Gmail services
 
 ## Technologies
 
+- Google Sheets
+- Google Apps Script
 - Canva (Free Plan)
 - Google Drive
-- Google Apps Script
 - HTML
 - JavaScript
+- GmailApp
 
 ## How It Works
 
-1. Design marketing email content using Canva's free plan.
-2. Upload the relevant HTML files and image assets to Google Drive.
-3. Make the required image resources accessible through appropriate links and permissions.
-4. Use Google Apps Script to process the email content and insert recipient-specific information.
-5. Generate and send personalized marketing emails through the configured workflow.
+1. Maintain a customer list in Google Sheets with two columns: `Customer Name` and `Email Address`.
+2. Design the marketing email using Canva's free plan.
+3. Store the HTML email file, text version, and required image assets in Google Drive.
+4. Use Google Apps Script to retrieve the email template and associated images.
+5. Read customer information from Google Sheets and personalize each message with the recipient's name.
+6. Send the personalized emails through the configured Gmail account.
 
 ## Business Value
 
-- **Personalized outreach:** Send bulk communications while addressing individual recipients personally.
-- **Visual consistency:** Include designed email content and supporting images.
-- **Operational efficiency:** Reduce repetitive manual work involved in preparing marketing emails.
-- **Cost-effective automation:** Combine existing tools instead of purchasing a dedicated marketing automation platform.
+- **Scalable personalization:** Send bulk marketing emails with recipient-specific greetings.
+- **Operational efficiency:** Reduce repetitive manual editing and sending.
+- **Cost-effective implementation:** Combine existing tools rather than purchasing a dedicated marketing automation platform.
+- **Consistent communication:** Use a common marketing design while personalizing recipient details.
 
 ## Scope and Limitations
 
-- Images must remain accessible to email recipients through the configured hosting and sharing permissions.
-- Email rendering may vary across email clients.
-- Google Apps Script execution and email sending are subject to account permissions and service quotas.
-- The workflow personalizes messages using available customer information; it does not imply automated customer segmentation or behavioral targeting.
+- Personalization is based on customer names and email addresses maintained in Google Sheets.
+- The workflow does not independently perform customer segmentation or behavioral targeting.
+- Email rendering depends on the recipient's email client.
+- Google Apps Script and Gmail sending are subject to account permissions and service quotas.
+- Recipient consent, opt-out handling, and applicable marketing email requirements must be addressed before production use.
